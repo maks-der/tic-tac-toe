@@ -1,6 +1,7 @@
 #ifndef TIC_TAC_TOE_FIELDRENDERER_H
 #define TIC_TAC_TOE_FIELDRENDERER_H
 
+#include <iostream>
 #include <SFML/Graphics.hpp>
 
 using namespace sf;
@@ -11,11 +12,13 @@ public:
     void static draw(RenderWindow &window);
 
 private:
-    void static draw_field(RenderWindow &window);
+    static sf::Vector2<float> draw_field(sf::RenderWindow &window);
 
-    void static draw_cells(RenderWindow &window);
+    static void draw_cells(sf::RenderWindow &window, sf::Vector2<float> fieldPosition);
 
-    void static draw_cell(RenderWindow &window, Vector2<float> position);
+    static void draw_cell(RenderWindow &window, Vector2<float> position);
+
+    void fill_with_values(std::vector<int> values);
 };
 
 #endif

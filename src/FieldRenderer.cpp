@@ -5,11 +5,11 @@
 using namespace Constants;
 
 void FieldRenderer::draw(sf::RenderWindow &window) {
-    draw_field(window);
-    draw_cells(window);
+    sf::Vector2 fieldPosition = draw_field(window);
+    draw_cells(window, fieldPosition);
 }
 
-void FieldRenderer::draw_field(sf::RenderWindow &window) {
+sf::Vector2<float> FieldRenderer::draw_field(sf::RenderWindow &window) {
     float margin = (WINDOW_HEIGHT - FIELD_SIZE) / 2;
 
     sf::RectangleShape rec;
@@ -20,12 +20,14 @@ void FieldRenderer::draw_field(sf::RenderWindow &window) {
     rec.setFillColor(FIELD_COLOR);
 
     window.draw(rec);
+
+    return rec.getPosition();
 }
 
-void FieldRenderer::draw_cells(sf::RenderWindow &window) {
-    float margin = (WINDOW_HEIGHT - FIELD_SIZE) / 2;
-    float initialTop = 30;
-    float initialLeft = 130;
+void FieldRenderer::draw_cells(sf::RenderWindow &window, sf::Vector2<float> fieldPosition) {
+    float margin = (FIELD_SIZE - CELL_SIZE * 3) / 4;
+    float initialTop = fieldPosition.y + margin;
+    float initialLeft = fieldPosition.x + margin;
 
     std::vector<sf::Vector2<float>> cells = {
             {initialLeft,                              initialTop},
