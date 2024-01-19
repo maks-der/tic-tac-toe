@@ -5,11 +5,12 @@
 
 using namespace Constants;
 
-
 int main() {
     std::cout << "Hello";
 
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Tic Tac Toe");
+
+    window.setPosition({100, 100});
 
     while (window.isOpen()) {
         sf::Event event;
@@ -18,7 +19,8 @@ int main() {
             if (event.type == sf::Event::Closed) window.close();
         }
         window.clear(CELL_COLOR);
-        FieldRenderer::draw(window);
+        std::vector<int> fieldValues = {2, 0, 1, 2, 1, 2, 0, 1, 2};
+        FieldRenderer::draw(window, fieldValues);
         window.display();
     }
     return 0;
