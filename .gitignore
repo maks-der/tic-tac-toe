@@ -12,3 +12,8 @@ _deps
 
 cmake-build-debug
 .idea
+build
+bin
+
+CPackConfig.cmake
+CPackSourceConfig.cmake
