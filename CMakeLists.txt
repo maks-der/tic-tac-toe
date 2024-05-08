@@ -11,8 +11,14 @@ FetchContent_Declare(SFML
         GIT_TAG 2.6.x)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(tic_tac_toe main.cpp src/FieldRenderer.h src/Constants.h
-        src/FieldRenderer.cpp)
+add_executable(tic_tac_toe
+        main.cpp
+        src/FieldRenderer.h
+        src/Constants.h
+        src/FieldRenderer.cpp
+        src/GameController.h
+        src/GameController.cpp
+)
 target_link_libraries(tic_tac_toe PRIVATE sfml-graphics)
 target_compile_features(tic_tac_toe PRIVATE cxx_std_17)
 
