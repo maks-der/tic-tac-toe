@@ -21,6 +21,8 @@ private:
 
     sf::Vector2f getPositionByIndex(int index);
 
+    std::vector<sf::Vector2f> getCellsPositions();
+
     bool isInCell(sf::Vector2f cellLeftTop, sf::Vector2f position);
 
 public:

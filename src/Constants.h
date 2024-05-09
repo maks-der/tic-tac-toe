@@ -12,10 +12,9 @@ namespace Constants {
 
     const float CELL_SIZE = 170;
     const sf::Color CELL_COLOR = sf::Color(243, 240, 232);
-    const sf::Color CELL_COLOR_HOVER = sf::Color(200, 200, 250);
 
-//    const sf::Color VALUE_COLOR = sf::Color(200, 61, 33);
-    const sf::Color VALUE_COLOR = sf::Color(17, 36, 105);
+    const sf::Color CROSS_COLOR = sf::Color(25, 50, 150);
+    const sf::Color CIRCLE_COLOR = sf::Color(150, 25, 25);
 }
 
 #endif

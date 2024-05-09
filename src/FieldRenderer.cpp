@@ -76,7 +76,7 @@ void FieldRenderer::drawValue(int value, sf::Vector2f position) {
         cross.setPoint(11, sf::Vector2f(50 + offset, 85));
 
         cross.setPosition(position);
-        cross.setFillColor(VALUE_COLOR);
+        cross.setFillColor(CROSS_COLOR);
         window.draw(cross);
 
         return;
@@ -90,55 +90,45 @@ void FieldRenderer::drawValue(int value, sf::Vector2f position) {
     circle.setFillColor(sf::Color::Transparent);
 
     circle.setOutlineThickness(outline);
-    circle.setOutlineColor(VALUE_COLOR);
+    circle.setOutlineColor(CIRCLE_COLOR);
 
     window.draw(circle);
 }
 
 sf::Vector2f FieldRenderer::getPositionByIndex(int index) {
-    float margin = (FIELD_SIZE - CELL_SIZE * 3) / 4;
-    float initialTop = fieldPosition.y + margin;
-    float initialLeft = fieldPosition.x + margin;
-    std::vector<sf::Vector2f> cells = {
-            {initialLeft,                              initialTop},
-            {initialLeft + CELL_SIZE + margin,         initialTop},
-            {initialLeft + CELL_SIZE * 2 + margin * 2, initialTop},
-
-            {initialLeft,                              initialTop + CELL_SIZE + margin},
-            {initialLeft + CELL_SIZE + margin,         initialTop + CELL_SIZE + margin},
-            {initialLeft + CELL_SIZE * 2 + margin * 2, initialTop + CELL_SIZE + margin},
-
-            {initialLeft,                              initialTop + CELL_SIZE * 2 + margin * 2},
-            {initialLeft + CELL_SIZE + margin,         initialTop + CELL_SIZE * 2 + margin * 2},
-            {initialLeft + CELL_SIZE * 2 + margin * 2, initialTop + CELL_SIZE * 2 + margin * 2},
-    };
-
+    std::vector<sf::Vector2f> cells = getCellsPositions();
     return cells[index];
 }
 
 int FieldRenderer::getIndexByPosition(sf::Vector2f position) {
-    float margin = (FIELD_SIZE - CELL_SIZE * 3) / 4;
-    float initialTop = fieldPosition.y + margin;
-    float initialLeft = fieldPosition.x + margin;
-    std::vector<sf::Vector2f> cells = {
-            {initialLeft,                              initialTop},
-            {initialLeft + CELL_SIZE + margin,         initialTop},
-            {initialLeft + CELL_SIZE * 2 + margin * 2, initialTop},
-
-            {initialLeft,                              initialTop + CELL_SIZE + margin},
-            {initialLeft + CELL_SIZE + margin,         initialTop + CELL_SIZE + margin},
-            {initialLeft + CELL_SIZE * 2 + margin * 2, initialTop + CELL_SIZE + margin},
-
-            {initialLeft,                              initialTop + CELL_SIZE * 2 + margin * 2},
-            {initialLeft + CELL_SIZE + margin,         initialTop + CELL_SIZE * 2 + margin * 2},
-            {initialLeft + CELL_SIZE * 2 + margin * 2, initialTop + CELL_SIZE * 2 + margin * 2},
-    };
+    std::vector<sf::Vector2f> cells = getCellsPositions();
 
     for (int i = 0; i < cells.size(); ++i) {
         if (isInCell(cells[i], position)) return i;
     }
     return -1;
 }
+
+std::vector<sf::Vector2f> FieldRenderer::getCellsPositions() {
+    float margin = (FIELD_SIZE - CELL_SIZE * 3) / 4;
+    float initialTop = fieldPosition.y + margin;
+    float initialLeft = fieldPosition.x + margin;
+    std::vector<sf::Vector2f> cells ={
+        {initialLeft,                              initialTop},
+        {initialLeft + CELL_SIZE + margin,         initialTop},
+        {initialLeft + CELL_SIZE * 2 + margin * 2, initialTop},
+
+        {initialLeft,                              initialTop + CELL_SIZE + margin},
+        {initialLeft + CELL_SIZE + margin,         initialTop + CELL_SIZE + margin},
+        {initialLeft + CELL_SIZE * 2 + margin * 2, initialTop + CELL_SIZE + margin},
+
+        {initialLeft,                              initialTop + CELL_SIZE * 2 + margin * 2},
+        {initialLeft + CELL_SIZE + margin,         initialTop + CELL_SIZE * 2 + margin * 2},
+        {initialLeft + CELL_SIZE * 2 + margin * 2, initialTop + CELL_SIZE * 2 + margin * 2},
+    };
+    return cells;
+}
+
 
 bool FieldRenderer::isInCell(sf::Vector2f cellLeftTop, sf::Vector2f position) {
     if (cellLeftTop.x <= position.x && cellLeftTop.y <= position.y) {

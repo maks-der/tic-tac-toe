@@ -18,8 +18,24 @@ add_executable(tic_tac_toe
         src/FieldRenderer.cpp
         src/GameController.h
         src/GameController.cpp
+        src/DialogRenderer.h
+        src/DialogRenderer.cpp
+        src/SoundsController.h
+        src/SoundsController.cpp
 )
-target_link_libraries(tic_tac_toe PRIVATE sfml-graphics)
+
+set(ASSETS_FILES
+        assets/cantarell-regular.ttf
+        assets/click-sound.wav
+        assets/game-over-sound.wav
+)
+
+foreach (asset_file ${ASSETS_FILES})
+    configure_file(src/${asset_file} ${CMAKE_BINARY_DIR}/bin/${asset_file} COPYONLY)
+endforeach()
+
+
+target_link_libraries(tic_tac_toe PRIVATE sfml-audio sfml-graphics)
 target_compile_features(tic_tac_toe PRIVATE cxx_std_17)
 
 if (WIN32)
